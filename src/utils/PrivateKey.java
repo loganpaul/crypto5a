@@ -1,28 +1,30 @@
 package utils;
 
+import java.math.BigInteger;
+
 public class PrivateKey extends Key {
 	
-	private int u;
+	private BigInteger u;
 	
 	
 	public PrivateKey() {}
 	
-	public PrivateKey(int u, int n) {
+	public PrivateKey(BigInteger u, BigInteger n) {
 		this.u = u;
 		this.n = n;
 	}
 	
 	
-	public int getU() {
+	public BigInteger getU() {
 		return u;
 	}
-	public void setU(int u) {
+	public void setU(BigInteger u) {
 		this.u = u;
 	}
-	public int getN() {
+	public BigInteger getN() {
 		return n;
 	}
-	public void setN(int n) {
+	public void setN(BigInteger n) {
 		this.n = n;
 	}
 }

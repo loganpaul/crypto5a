@@ -1,26 +1,28 @@
 package main;
 
+import java.math.BigInteger;
+
 import persons.Alice;
 import persons.Bob;
 
 public class Main {
 
 	public static void main(String[] args) {
-		int p = 5;
-		int q = 7;
+		BigInteger p = new BigInteger("5"); //53
+		BigInteger q = new BigInteger("7"); //97
 		int bobsChoice = 6;
 		
 		Alice alice = new Alice(p,q);
 		Bob bob = new Bob(bobsChoice, alice.publicKey, alice.cryptedAnswersList);
 
-		Integer Z = bob.generateZ();
-		System.out.println(Z);
+		BigInteger Z = bob.generateZ();
+		System.out.println("Z : " + Z);
 		
-		Integer B = alice.generateB(Z);
-		System.out.println(B);
+		BigInteger B = alice.generateB(Z);
+		System.out.println("B : " + B);
 		
-		Integer clearAnswer = bob.readClearAnswer(B);
-		System.out.println(clearAnswer);
+		BigInteger clearAnswer = bob.readClearAnswer(B);
+		System.out.println("Clear Answer : " + clearAnswer);
 	}
 
 }

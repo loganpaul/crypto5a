@@ -1,6 +1,8 @@
 package utils;
 
+import java.math.BigInteger;
+
 public abstract class Key {
 	
-	protected int n;
+	protected BigInteger n;
 }

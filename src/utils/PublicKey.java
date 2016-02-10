@@ -1,29 +1,31 @@
 package utils;
 
+import java.math.BigInteger;
+
 public class PublicKey extends Key {
 	
-	private int c;
+	private BigInteger c;
 	
 	
 	public PublicKey() {}
 	
-	public PublicKey(int n, int c) {
+	public PublicKey(BigInteger n, BigInteger c) {
 		this.c = c;
 		this.n = n;
 	}
 	
 	
 	
-	public int getC() {
+	public BigInteger getC() {
 		return c;
 	}
-	public void setC(int c) {
+	public void setC(BigInteger c) {
 		this.c = c;
 	}
-	public int getN() {
+	public BigInteger getN() {
 		return n;
 	}
-	public void setN(int n) {
+	public void setN(BigInteger n) {
 		this.n = n;
 	}
 }

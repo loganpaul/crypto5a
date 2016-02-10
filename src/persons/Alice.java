@@ -1,5 +1,6 @@
 package persons;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,45 +25,47 @@ public class Alice {
 	public final List<String> questionsList = new ArrayList<String>();
 	
 	//private answers
-	private final int A1 = 5;
-	private final int A2 = 89;
-	private final int A3 = 50;
-	private final int A4 = 0;
-	private final int A5 = -5;
-	private final int A6 = 42;
-	private final int A7 = 1000;
-	private final int A8 = 777;
-	private final int A9 = 123;
-	private final int A10 = -23;
-	private final List<Integer> answersList = new ArrayList<Integer>();
-	public List<Integer> cryptedAnswersList;
+	private final BigInteger A1 = new BigInteger("5");
+	private final BigInteger A2 = new BigInteger("89");
+	private final BigInteger A3 = new BigInteger("50");
+	private final BigInteger A4 = new BigInteger("0");
+	private final BigInteger A5 = new BigInteger("4");
+	private final BigInteger A6 = new BigInteger("42");
+	private final BigInteger A7 = new BigInteger("1000");
+	private final BigInteger A8 = new BigInteger("777");
+	private final BigInteger A9 = new BigInteger("123");
+	private final BigInteger A10 = new BigInteger("23");
+	private final List<BigInteger> answersList = new ArrayList<BigInteger>();
+	public List<BigInteger> cryptedAnswersList;
 	
 	public PublicKey publicKey;
 	private PrivateKey privateKey;
 	private Crypto crypto;
 	
-	private int p;
-	private int q;
+	private BigInteger p;
+	private BigInteger q;
 	
-	public Alice(int p, int q) {
+	public Alice(BigInteger p, BigInteger q) {
 		init(p,q);
+		//System.out.println("Answer6 : " + A6 );
 		List<Key> keys = crypto.generateKeys(p, q);
 		publicKey = (PublicKey) keys.get(0);
 		privateKey = (PrivateKey) keys.get(1);
 		
-		cryptedAnswersList = new ArrayList<Integer>();
+		cryptedAnswersList = new ArrayList<BigInteger>();
 		
 		for(int i = 0; i < answersList.size(); i++) {
 			cryptedAnswersList.add( crypto.Encrypt(publicKey, answersList.get(i)) );
 		}
 	}
 	
-	public Integer generateB(Integer Z) {
-		Integer B = crypto.Decrypt(privateKey, Z);
+	public BigInteger generateB(BigInteger Z) {
+		//System.out.println("Sum : " + crypto.Encrypt(publicKey, A6.add(new BigInteger("808710506"))) );
+		BigInteger B = crypto.Decrypt(privateKey, Z);
 		return B;
 	}
 	
-	public void init(int p, int q) {
+	public void init(BigInteger p, BigInteger q) {
 		crypto = new Crypto();
 		this.p = p;
 		this.q = q;
