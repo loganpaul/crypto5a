@@ -4,7 +4,7 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import utils.Crypto;
+import utils.RSA;
 import utils.Key;
 import utils.PrivateKey;
 import utils.PublicKey;
@@ -40,14 +40,14 @@ public class Alice {
 	
 	public PublicKey publicKey;
 	private PrivateKey privateKey;
-	private Crypto crypto;
+	private RSA crypto;
 	
 	private BigInteger p;
 	private BigInteger q;
 	
 	public Alice(BigInteger p, BigInteger q) {
 		init(p,q);
-		//System.out.println("Answer6 : " + A6 );
+		System.out.println("Answer6 : " + A6 );
 		List<Key> keys = crypto.generateKeys(p, q);
 		publicKey = (PublicKey) keys.get(0);
 		privateKey = (PrivateKey) keys.get(1);
@@ -60,13 +60,13 @@ public class Alice {
 	}
 	
 	public BigInteger generateB(BigInteger Z) {
-		//System.out.println("Sum : " + crypto.Encrypt(publicKey, A6.add(new BigInteger("808710506"))) );
+		System.out.println("Mult : " + crypto.Encrypt(publicKey, A6.multiply(new BigInteger("808710506"))) );
 		BigInteger B = crypto.Decrypt(privateKey, Z);
 		return B;
 	}
 	
 	public void init(BigInteger p, BigInteger q) {
-		crypto = new Crypto();
+		crypto = new RSA();
 		this.p = p;
 		this.q = q;
 		

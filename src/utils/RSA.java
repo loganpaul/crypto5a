@@ -4,13 +4,13 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Crypto {
+public class RSA {
 
 	private BigInteger generatePrime(BigInteger m) {
 		// on veut c tel que pgcd(c,m) = 1 et c > 1
 		BigInteger c;
 		do {
-			c = new BigInteger( "" + Math.round(Math.random() * 100) );
+			c = new BigInteger( "" + Math.round(Math.random() * 100 + 3) );
 		} while (!c.gcd(m).equals(new BigInteger("1")));
 		return c;
 	}
@@ -25,10 +25,13 @@ public class Crypto {
 
 	public List<Key> generateKeys(BigInteger p, BigInteger q) {
 		BigInteger n = p.multiply(q);
-		BigInteger m = p.subtract(new BigInteger("-1")).multiply(
-				q.multiply(new BigInteger("-1")));
+		System.out.println("N : " + n);
+		BigInteger m = p.subtract(new BigInteger("1")).multiply(q.subtract(new BigInteger("1")));
+		System.out.println("M : " + m);
 		BigInteger c = generatePrime(m);
+		System.out.println("C : " + c);
 		BigInteger u = generateU(m, c);
+		System.out.println("U : " + u);
 
 		Key publicKey = new PublicKey(n, c);
 		Key privateKey = new PrivateKey(u, n);

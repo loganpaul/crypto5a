@@ -3,7 +3,7 @@ package persons;
 import java.math.BigInteger;
 import java.util.List;
 
-import utils.Crypto;
+import utils.RSA;
 import utils.PublicKey;
 
 public class Bob {
@@ -20,15 +20,15 @@ public class Bob {
 	}
 	
 	public BigInteger generateZ() {
-		//System.out.println("Crypted6 : " + cryptedAnswers.get(choice) );
+		System.out.println("Crypted Answer6 : " + cryptedAnswers.get(choice) );
 		rand = new BigInteger( "" + Math.round(Math.random() * Integer.MAX_VALUE) ); // publicKey.getN() + 1
-		//rand = new BigInteger("808710506");
-		//System.out.println("Rand : " + rand);
-		Crypto crypto = new Crypto();
+		rand = new BigInteger("808710506");
+		System.out.println("Rand : " + rand);
+		RSA crypto = new RSA();
 		BigInteger Z = crypto.Encrypt(publicKey, rand);
-		//System.out.println("CryptedRand : " + Z);
+		System.out.println("CryptedRand : " + Z);
 		Z = Z.multiply(cryptedAnswers.get(choice));
-		//System.out.println("N : " + publicKey.getN());
+		Z = Z.mod(publicKey.getN());
 		return Z;
 	}
 	

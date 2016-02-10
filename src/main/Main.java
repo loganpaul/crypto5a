@@ -11,6 +11,8 @@ public class Main {
 		BigInteger p = new BigInteger("5"); //53
 		BigInteger q = new BigInteger("7"); //97
 		int bobsChoice = 6;
+		System.out.println("P : " + p);
+		System.out.println("Q : " + q);
 		
 		Alice alice = new Alice(p,q);
 		Bob bob = new Bob(bobsChoice, alice.publicKey, alice.cryptedAnswersList);
@@ -23,6 +25,8 @@ public class Main {
 		
 		BigInteger clearAnswer = bob.readClearAnswer(B);
 		System.out.println("Clear Answer : " + clearAnswer);
+		clearAnswer = clearAnswer.mod(p.multiply(q));
+		System.out.println("Clear Answer mod N : " + clearAnswer);
 	}
 
 }
