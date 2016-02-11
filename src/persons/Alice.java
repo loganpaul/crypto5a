@@ -4,10 +4,10 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
-import utils.RSA;
-import utils.RSAKey;
-import utils.RSAPrivateKey;
-import utils.RSAPublicKey;
+import RSA.RSA;
+import RSA.RSAKey;
+import RSA.RSAPrivateKey;
+import RSA.RSAPublicKey;
 
 public class Alice {
 	

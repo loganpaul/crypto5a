@@ -1,4 +1,4 @@
-package utils;
+package RSA;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -6,12 +6,15 @@ import java.util.List;
 
 public class RSA {
 
+	private final BigInteger ONE = new BigInteger("1");
+	private final BigInteger ZERO = new BigInteger("0");
+	
 	private BigInteger generatePrime(BigInteger m) {
 		// on veut c tel que pgcd(c,m) = 1 et c > 1
 		BigInteger c;
 		do {
 			c = new BigInteger( "" + Math.round(Math.random() * 100 + 3) );
-		} while (!c.gcd(m).equals(new BigInteger("1")));
+		} while (!c.gcd(m).equals(ONE));
 		return c;
 	}
 
@@ -26,7 +29,7 @@ public class RSA {
 	public List<RSAKey> generateKeys(BigInteger p, BigInteger q) {
 		BigInteger n = p.multiply(q);
 		System.out.println("N : " + n);
-		BigInteger m = p.subtract(new BigInteger("1")).multiply(q.subtract(new BigInteger("1")));
+		BigInteger m = p.subtract(ONE).multiply(q.subtract(ONE));
 		System.out.println("M : " + m);
 		BigInteger c = generatePrime(m);
 		System.out.println("C : " + c);
@@ -68,8 +71,8 @@ public class RSA {
 	public BigInteger[] extGcd(BigInteger m, BigInteger n) {
 		// Both arrays ma and na are arrays of 3 integers such that
 		// ma[0] = m ma[1] + n ma[2] and na[0] = m na[1] + n na[2]
-		BigInteger[] ma = new BigInteger[] { m, new BigInteger("1"), new BigInteger("0") };
-		BigInteger[] na = new BigInteger[] { n, new BigInteger("0"), new BigInteger("1") };
+		BigInteger[] ma = new BigInteger[] { m, ONE, ZERO };
+		BigInteger[] na = new BigInteger[] { n, ZERO, ONE };
 		int i; // Loop index
 		BigInteger q; // Quotient
 		BigInteger r; // Rest
@@ -83,7 +86,7 @@ public class RSA {
 		}
 
 		// It can be assumed that m >= n
-		while (na[0].compareTo(new BigInteger("0")) == 1) {
+		while (na[0].compareTo(ZERO) == 1) {
 			q = ma[0].divide(na[0]); // Quotient
 			for (i = 0; i < 3; i++) {
 				r = ma[i].subtract( q.multiply(na[i]) );

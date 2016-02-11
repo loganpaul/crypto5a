@@ -3,8 +3,8 @@ package persons;
 import java.math.BigInteger;
 import java.util.List;
 
-import utils.RSA;
-import utils.RSAPublicKey;
+import RSA.RSA;
+import RSA.RSAPublicKey;
 
 public class Bob {
 	
