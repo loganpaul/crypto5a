@@ -30,8 +30,8 @@ public class Paillier {
 		if(clearMessage.compareTo(n) >= 0) {
 			return null;
 		}
-		
-		BigInteger r = new BigInteger("" + (int) Math.random() * n.subtract(ONE).intValueExact());
+
+		BigInteger r = new BigInteger( "" + Math.round(Math.random() * n.subtract(ONE).intValueExact()) );
 		//r.multiply(n.subtract(ONE));
 		r.add(ONE);
 

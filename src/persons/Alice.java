@@ -30,14 +30,14 @@ public class Alice {
 
 	private final BigInteger A0 = new BigInteger("23");
 	private final BigInteger A1 = new BigInteger("5");
-	private final BigInteger A2 = new BigInteger("89");
-	private final BigInteger A3 = new BigInteger("50");
+	private final BigInteger A2 = new BigInteger("8");
+	private final BigInteger A3 = new BigInteger("34");
 	private final BigInteger A4 = new BigInteger("0");
 	private final BigInteger A5 = new BigInteger("4");
-	private final BigInteger A6 = new BigInteger("42");
-	private final BigInteger A7 = new BigInteger("1000");
-	private final BigInteger A8 = new BigInteger("777");
-	private final BigInteger A9 = new BigInteger("123");
+	private final BigInteger A6 = new BigInteger("1");
+	private final BigInteger A7 = new BigInteger("30");
+	private final BigInteger A8 = new BigInteger("12");
+	private final BigInteger A9 = new BigInteger("22");
 	private final List<BigInteger> answersList = new ArrayList<BigInteger>();
 	public List<BigInteger> cryptedAnswersList;
 	
