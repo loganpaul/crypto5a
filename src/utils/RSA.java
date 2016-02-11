@@ -23,7 +23,7 @@ public class RSA {
 		return u;
 	}
 
-	public List<Key> generateKeys(BigInteger p, BigInteger q) {
+	public List<RSAKey> generateKeys(BigInteger p, BigInteger q) {
 		BigInteger n = p.multiply(q);
 		System.out.println("N : " + n);
 		BigInteger m = p.subtract(new BigInteger("1")).multiply(q.subtract(new BigInteger("1")));
@@ -33,9 +33,9 @@ public class RSA {
 		BigInteger u = generateU(m, c);
 		System.out.println("U : " + u);
 
-		Key publicKey = new PublicKey(n, c);
-		Key privateKey = new PrivateKey(u, n);
-		List<Key> keys = new ArrayList<Key>();
+		RSAKey publicKey = new RSAPublicKey(n, c);
+		RSAKey privateKey = new RSAPrivateKey(u, n);
+		List<RSAKey> keys = new ArrayList<RSAKey>();
 
 		keys.add(publicKey);
 		keys.add(privateKey);
@@ -43,14 +43,14 @@ public class RSA {
 		return keys;
 	}
 
-	public BigInteger Encrypt(PublicKey publicKey, BigInteger clearMessage) {
+	public BigInteger Encrypt(RSAPublicKey publicKey, BigInteger clearMessage) {
 		// voir
 		// https://openclassrooms.com/courses/la-cryptographie-asymetrique-rsa/et-le-chiffrage-comme-ca-se-passe
 		BigInteger cryptedMessage = clearMessage.modPow(publicKey.getC(), publicKey.getN());
 		return cryptedMessage;
 	}
 
-	public BigInteger Decrypt(PrivateKey privateKey, BigInteger cryptedMessage) {
+	public BigInteger Decrypt(RSAPrivateKey privateKey, BigInteger cryptedMessage) {
 		// voir
 		// https://openclassrooms.com/courses/la-cryptographie-asymetrique-rsa/le-dechiffrage
 		BigInteger decryptedMessage = cryptedMessage.modPow(privateKey.getU(), privateKey.getN());

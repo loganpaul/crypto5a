@@ -2,14 +2,14 @@ package utils;
 
 import java.math.BigInteger;
 
-public class PrivateKey extends Key {
+public class RSAPrivateKey extends RSAKey {
 	
 	private BigInteger u;
 	
 	
-	public PrivateKey() {}
+	public RSAPrivateKey() {}
 	
-	public PrivateKey(BigInteger u, BigInteger n) {
+	public RSAPrivateKey(BigInteger u, BigInteger n) {
 		this.u = u;
 		this.n = n;
 	}

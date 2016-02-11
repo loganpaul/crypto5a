@@ -4,16 +4,16 @@ import java.math.BigInteger;
 import java.util.List;
 
 import utils.RSA;
-import utils.PublicKey;
+import utils.RSAPublicKey;
 
 public class Bob {
 	
 	public int choice;
-	public PublicKey publicKey;
+	public RSAPublicKey publicKey;
 	public List<BigInteger> cryptedAnswers;
 	private BigInteger rand;
 	
-	public Bob(int choice, PublicKey publicKey, List<BigInteger> cryptedAnswers) {
+	public Bob(int choice, RSAPublicKey publicKey, List<BigInteger> cryptedAnswers) {
 		this.choice = choice;
 		this.publicKey = publicKey;
 		this.cryptedAnswers = cryptedAnswers;

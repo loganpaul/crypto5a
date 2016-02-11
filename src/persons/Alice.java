@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import utils.RSA;
-import utils.Key;
-import utils.PrivateKey;
-import utils.PublicKey;
+import utils.RSAKey;
+import utils.RSAPrivateKey;
+import utils.RSAPublicKey;
 
 public class Alice {
 	
@@ -38,8 +38,8 @@ public class Alice {
 	private final List<BigInteger> answersList = new ArrayList<BigInteger>();
 	public List<BigInteger> cryptedAnswersList;
 	
-	public PublicKey publicKey;
-	private PrivateKey privateKey;
+	public RSAPublicKey publicKey;
+	private RSAPrivateKey privateKey;
 	private RSA crypto;
 	
 	private BigInteger p;
@@ -48,9 +48,9 @@ public class Alice {
 	public Alice(BigInteger p, BigInteger q) {
 		init(p,q);
 		System.out.println("Answer6 : " + A6 );
-		List<Key> keys = crypto.generateKeys(p, q);
-		publicKey = (PublicKey) keys.get(0);
-		privateKey = (PrivateKey) keys.get(1);
+		List<RSAKey> keys = crypto.generateKeys(p, q);
+		publicKey = (RSAPublicKey) keys.get(0);
+		privateKey = (RSAPrivateKey) keys.get(1);
 		
 		cryptedAnswersList = new ArrayList<BigInteger>();
 		

@@ -2,7 +2,7 @@ package utils;
 
 import java.math.BigInteger;
 
-public abstract class Key {
+public abstract class RSAKey {
 	
 	protected BigInteger n;
 }
