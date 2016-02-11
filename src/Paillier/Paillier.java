@@ -30,10 +30,11 @@ public class Paillier {
 		if(clearMessage.compareTo(n) >= 0) {
 			return null;
 		}
-		BigInteger r = new BigInteger("" + Math.random());
-		r.multiply(n.subtract(ONE));
-		r.add(ONE);
 		
+		BigInteger r = new BigInteger("" + (int) Math.random() * n.subtract(ONE).intValueExact());
+		//r.multiply(n.subtract(ONE));
+		r.add(ONE);
+
 		BigInteger c1 = (n.add(ONE)).modPow(clearMessage, n.pow(2));
 		BigInteger c2 = r.modPow(n, n.pow(2));
 		BigInteger c = c1.multiply(c2).mod(n.pow(2));

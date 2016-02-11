@@ -1,6 +1,7 @@
 package main;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import persons.Alice;
 import persons.Bob;
@@ -10,8 +11,17 @@ public class Main {
 	public static void main(String[] args) {
 		BigInteger p = new BigInteger("5"); //53
 		BigInteger q = new BigInteger("7"); //97
-		int bobsChoice = 6;
-		System.out.println("P : " + p);
+		BigInteger bobsChoice = new BigInteger("5");
+		
+		Bob bob = new Bob(bobsChoice,p,q);
+		BigInteger cryptedBobsChoice = bob.choiceEncryption();
+		Alice alice = new Alice(bob.publicKey,cryptedBobsChoice);
+		List<BigInteger> maskedAnswersList = alice.maskAnswers();
+		BigInteger clearAnswer = bob.DecrypteAnswer(maskedAnswersList);
+		
+		System.out.println(clearAnswer);
+		
+		/*System.out.println("P : " + p);
 		System.out.println("Q : " + q);
 		
 		Alice alice = new Alice(p,q);
@@ -26,7 +36,7 @@ public class Main {
 		BigInteger clearAnswer = bob.readClearAnswer(B);
 		System.out.println("Clear Answer : " + clearAnswer);
 		clearAnswer = clearAnswer.mod(p.multiply(q));
-		System.out.println("Clear Answer mod N : " + clearAnswer);
+		System.out.println("Clear Answer mod N : " + clearAnswer);*/
 	}
 
 }

@@ -3,17 +3,38 @@ package persons;
 import java.math.BigInteger;
 import java.util.List;
 
+import Paillier.*;
 import RSA.RSA;
 import RSA.RSAPublicKey;
 
 public class Bob {
 	
-	public int choice;
-	public RSAPublicKey publicKey;
+	public PaillierPublicKey publicKey;
+	private PaillierPrivateKey privateKey;
+	private BigInteger choice;
+	private Paillier cryptosystem;
+	//public RSAPublicKey publicKey;
 	public List<BigInteger> cryptedAnswers;
-	private BigInteger rand;
+	//private BigInteger rand;
 	
-	public Bob(int choice, RSAPublicKey publicKey, List<BigInteger> cryptedAnswers) {
+	public Bob(BigInteger choice, BigInteger p, BigInteger q) {
+		this.choice = choice;
+		cryptosystem = new Paillier();
+		List<PaillierKey> keys = cryptosystem.generateKeys(p, q);
+		privateKey = (PaillierPrivateKey) keys.get(1);
+		publicKey = (PaillierPublicKey) keys.get(0);
+	}
+	
+	public BigInteger choiceEncryption() {
+		return cryptosystem.Encrypt(publicKey, choice);
+	}
+	
+	public BigInteger DecrypteAnswer(List<BigInteger> maskedAnswersList) {
+		BigInteger cryptedAnswer = maskedAnswersList.get(choice.intValueExact());
+		return cryptosystem.Decrypt(privateKey, cryptedAnswer);
+	}
+	
+	/*public Bob(int choice, RSAPublicKey publicKey, List<BigInteger> cryptedAnswers) {
 		this.choice = choice;
 		this.publicKey = publicKey;
 		this.cryptedAnswers = cryptedAnswers;
@@ -36,4 +57,5 @@ public class Bob {
 		BigInteger clearAnswer = B.subtract(rand);
 		return clearAnswer;
 	}
+	*/
 }
