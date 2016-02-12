@@ -5,8 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Paillier {
-	//https://fr.wikipedia.org/wiki/Cryptosyst%C3%A8me_de_Paillier
-	
+
 	private final BigInteger ONE = new BigInteger("1");
 	
 	public List<PaillierKey> generateKeys(BigInteger p, BigInteger q) {
@@ -31,9 +30,9 @@ public class Paillier {
 			return null;
 		}
 
-		BigInteger r = new BigInteger( "" + Math.round(Math.random() * n.subtract(ONE).intValueExact()) );
-		//r.multiply(n.subtract(ONE));
-		r.add(ONE);
+		BigInteger r = new BigInteger( "" + Math.round(Math.random() * 500000) );
+		r = r.mod(n.subtract(ONE));
+		r = r.add(ONE);
 
 		BigInteger c1 = (n.add(ONE)).modPow(clearMessage, n.pow(2));
 		BigInteger c2 = r.modPow(n, n.pow(2));
@@ -45,15 +44,10 @@ public class Paillier {
 	public BigInteger Decrypt(PaillierPrivateKey privateKey, BigInteger cryptedMessage) {
 		
 		BigInteger n = privateKey.getN();
-		BigInteger tmp = n.subtract(ONE).mod(privateKey.getPhi());
-		BigInteger r = cryptedMessage.modPow(tmp,n);
-		
-		//tmp = r.pow(n.negate().intValueExact());
-		tmp = r.modPow(n, n.pow(2));
-		tmp = tmp.modInverse(n.pow(2));
-		tmp = cryptedMessage.multiply(tmp).mod(n.pow(2));
-		BigInteger m = tmp.subtract(ONE).divide(n);
-		
-		return m;
+		BigInteger r = cryptedMessage.modPow(n.modPow(BigInteger.ONE.negate(), privateKey.getPhi()), n);
+        BigInteger clearMessage = ((r.modPow(n, n.pow(2)).modInverse(n.pow(2))).multiply(cryptedMessage).mod(n.pow(2))).subtract(BigInteger.ONE).divide(n);
+    
+		return clearMessage;
 	}
+	
 }

@@ -27,7 +27,6 @@ public class Alice {
 	public final List<String> questionsList = new ArrayList<String>();
 	
 	//private answers
-
 	private final BigInteger A0 = new BigInteger("23");
 	private final BigInteger A1 = new BigInteger("5");
 	private final BigInteger A2 = new BigInteger("8");
@@ -40,13 +39,6 @@ public class Alice {
 	private final BigInteger A9 = new BigInteger("22");
 	private final List<BigInteger> answersList = new ArrayList<BigInteger>();
 	public List<BigInteger> cryptedAnswersList;
-	
-	/*public RSAPublicKey publicKey;
-	private RSAPrivateKey privateKey;
-	private RSA crypto;
-	
-	private BigInteger p;
-	private BigInteger q;*/
 	
 	public PaillierPublicKey publicKey;
 	private Paillier cryptosytem;
@@ -70,7 +62,7 @@ public class Alice {
 		BigInteger n = publicKey.getN();
 		for(BigInteger cryptedAnswer : cryptedAnswersList) {
 			BigInteger M = cryptedBobsChoice.multiply( cryptosytem.Encrypt(publicKey, k.negate()) );
-			BigInteger rand = new BigInteger("" + Math.round(Math.random() * n.intValueExact()));
+			BigInteger rand = new BigInteger("" + Math.round(Math.random() * 500000));
 			rand = rand.mod(n);
 			M = M.modPow(rand, n.pow(2));
 			BigInteger maskedAnswer = M.multiply(cryptedAnswer).mod(n.pow(2));
@@ -103,52 +95,4 @@ public class Alice {
 		answersList.add(A8);
 		answersList.add(A9);
 	}
-	
-	/*public Alice(BigInteger p, BigInteger q) {
-		init(p,q);
-		System.out.println("Answer6 : " + A6 );
-		List<RSAKey> keys = crypto.generateKeys(p, q);
-		publicKey = (RSAPublicKey) keys.get(0);
-		privateKey = (RSAPrivateKey) keys.get(1);
-		
-		cryptedAnswersList = new ArrayList<BigInteger>();
-		
-		for(int i = 0; i < answersList.size(); i++) {
-			cryptedAnswersList.add( crypto.Encrypt(publicKey, answersList.get(i)) );
-		}
-	}
-	
-	public BigInteger generateB(BigInteger Z) {
-		System.out.println("Mult : " + crypto.Encrypt(publicKey, A6.multiply(new BigInteger("808710506"))) );
-		BigInteger B = crypto.Decrypt(privateKey, Z);
-		return B;
-	}
-	
-	public void init(BigInteger p, BigInteger q) {
-		crypto = new RSA();
-		this.p = p;
-		this.q = q;
-		
-		questionsList.add(Q1);
-		questionsList.add(Q2);
-		questionsList.add(Q3);
-		questionsList.add(Q4);
-		questionsList.add(Q5);
-		questionsList.add(Q6);
-		questionsList.add(Q7);
-		questionsList.add(Q8);
-		questionsList.add(Q9);
-		questionsList.add(Q10);
-		
-		answersList.add(A1);
-		answersList.add(A2);
-		answersList.add(A3);
-		answersList.add(A4);
-		answersList.add(A5);
-		answersList.add(A6);
-		answersList.add(A7);
-		answersList.add(A8);
-		answersList.add(A9);
-		answersList.add(A10);
-	}*/
 }
