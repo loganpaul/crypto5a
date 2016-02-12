@@ -47,7 +47,10 @@ public class Paillier {
 		BigInteger n = privateKey.getN();
 		BigInteger tmp = n.subtract(ONE).mod(privateKey.getPhi());
 		BigInteger r = cryptedMessage.modPow(tmp,n);
-		tmp = r.pow(n.negate().intValueExact());
+		
+		//tmp = r.pow(n.negate().intValueExact());
+		tmp = r.modPow(n, n.pow(2));
+		tmp = tmp.modInverse(n.pow(2));
 		tmp = cryptedMessage.multiply(tmp).mod(n.pow(2));
 		BigInteger m = tmp.subtract(ONE).divide(n);
 		

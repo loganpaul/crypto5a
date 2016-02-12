@@ -32,7 +32,7 @@ public class Alice {
 	private final BigInteger A1 = new BigInteger("5");
 	private final BigInteger A2 = new BigInteger("8");
 	private final BigInteger A3 = new BigInteger("34");
-	private final BigInteger A4 = new BigInteger("0");
+	private final BigInteger A4 = new BigInteger("3");
 	private final BigInteger A5 = new BigInteger("4");
 	private final BigInteger A6 = new BigInteger("1");
 	private final BigInteger A7 = new BigInteger("30");
@@ -69,15 +69,11 @@ public class Alice {
 		BigInteger k = new BigInteger("0");
 		BigInteger n = publicKey.getN();
 		for(BigInteger cryptedAnswer : cryptedAnswersList) {
-			System.out.println("k : " + k);
 			BigInteger M = cryptedBobsChoice.multiply( cryptosytem.Encrypt(publicKey, k.negate()) );
 			BigInteger rand = new BigInteger("" + Math.round(Math.random() * n.intValueExact()));
 			rand = rand.mod(n);
-			System.out.println("M before : " + M);
 			M = M.modPow(rand, n.pow(2));
-			System.out.println("M after : " + M);
-			System.out.println("CryptedAnswer : " + cryptedAnswer);
-			BigInteger maskedAnswer = M.multiply(cryptedAnswer);
+			BigInteger maskedAnswer = M.multiply(cryptedAnswer).mod(n.pow(2));
 			maskedAnswersList.add(maskedAnswer);
 			k = k.add(new BigInteger("1"));
 		}

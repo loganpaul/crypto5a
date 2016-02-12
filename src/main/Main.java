@@ -9,9 +9,9 @@ import persons.Bob;
 public class Main {
 
 	public static void main(String[] args) {
-		BigInteger p = new BigInteger("5"); //53
-		BigInteger q = new BigInteger("7"); //97
-		BigInteger bobsChoice = new BigInteger("5");
+		BigInteger p = new BigInteger("53"); //53
+		BigInteger q = new BigInteger("97"); //97
+		BigInteger bobsChoice = new BigInteger("6");
 		
 		Bob bob = new Bob(bobsChoice,p,q);
 		BigInteger cryptedBobsChoice = bob.choiceEncryption();
